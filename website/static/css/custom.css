@@ -1,0 +1,52 @@
+/* your custom css */
+.fixedHeaderContainer {
+  background: #20232a;
+}
+
+abbr {
+  white-space: nowrap;
+}
+
+figure {
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+figcaption {
+  font-size: 0.8em;
+  text-align: center;
+}
+
+table.traceability-matrix td {
+  text-align: center;
+}
+
+div.citations {
+  border-top: 1px solid #949c90;
+  font-size: 0.9em;
+  color: #949c90;
+  padding-top: 0.5em;
+}
+
+img.file-storage-diagram {
+  max-width: 300px;
+}
+
+div.notes {
+  font-size: 0.8em;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+}
+
+@media only screen and (max-width: 1023px) {
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}

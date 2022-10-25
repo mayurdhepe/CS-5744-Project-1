@@ -1,0 +1,25 @@
+{
+  "docs": {
+    "Introduction": ["introduction"],
+    "Requirements Summary": [
+      "use-cases",
+      "stakeholder-analysis",
+      "requirements"
+    ],
+    "High-Level Design": [
+      "system-architecture",
+      "file-storage-design",
+      "database-design",
+      "api-design",
+      "web-app-design",
+      "requirement-traceability-matrix"
+    ],
+    "Design Rationale": [
+      "system-architecture-rationale",
+      "data-tier-rationale",
+      "api-design-rationale",
+      "web-app-design-rationale",
+      "conclusion"
+    ]
+  }
+}
