@@ -9,14 +9,14 @@
 // site configuration options.
 
 const siteConfig = {
-  title: 'CS 5744 - Project 1 - Pet Adoption and Medical Record System',
+  title: 'CS 5744 - Project 1 - University Carpool Service',
   tagline: 'A website for testing',
-  url: 'https://jonathandixon.github.io', // Your website URL
+  url: 'https://mayurdhepe.github.io', // Your website URL
   baseUrl: '/cs-5744-project-1/',
 
   // Used for publishing and more
   projectName: 'cs-5744-project-1',
-  organizationName: 'jonathandixon',
+  organizationName: 'mayurdhepe',
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [],

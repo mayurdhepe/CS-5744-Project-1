@@ -1,5 +1,5 @@
 # cs-5744-project-1
-Virginia Tech - CS 5744 - Project 1 - Pet Medical Record System
+Virginia Tech - CS 5744 - Project 1 - University Carpool Service
 
 ## Development
 

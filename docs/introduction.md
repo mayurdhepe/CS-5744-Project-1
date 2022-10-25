@@ -4,13 +4,13 @@ title: Introduction
 sidebar_label: Introduction
 ---
 
-**Project Title:** Pet Adoption and Medical Record System
+**Project Title:** University Carpool Service
 
-**Authors:** Daniel Slutsky, Jonathan Dixon, Wenjia Song
+**Authors:** Aparna Ganesh, Mayur Dhepe, Purna Srivatsa, Rama Krishna Pinnimty
 
 ## Background
 
-According to the 2019-2020 APPA National Pet Owners Survey, 67% of U.S. households own a pet, which equates to 84.9 million homes.\[1\] The type of pets includes but not limited to dog, cat, bird, freshwater fish, saltwater fish, horse, and reptile. However, there is no centralized medical record system existing at this time to help shelters, veterinarians, and pet owners access a complete medical record of the animals and update the record. Current systems that track medical information for animals are fragmented. Veterinarians and adoption shelters maintain separate records, which makes it difficult to piece together an animal's history. If an animal transfers between veterinarians or shelters, their medical history may not travel with them. This system aims to solve this problem through a centralized medical record system.
+Our motivation stems from the need of university students trying to find rides when traveling short or long distances, especially during busy days when events take place (e.g game days, fests) or even late nights. It shares close resemblance to existing ride-hailing apps on the market however, our service prioritizes safety and the concept of carpooling more. We aim to address safety by developing HokieRide, an application that includes a verification system for the drivers and riders as authenticated students or faculty of Virginia Tech. In addition, the system will be linked to the campus police department in the case of any emergencies. The details regarding the location of the driver's car and the identity of the driver and passengers during a ride sharing trip will be shared. If successful, we hope to market this service to other universities and recruit members to fine-tune our system as needed for each university. In addition, we’d like to incorporate a credit system for those who offer rides by having some reward provided by the university to encourage carpooling. Our vision is to offer something different than the popular apps like Uber and Lyft by creating an affordable option and allowing students to feel greater safety by riding with their fellow university peers or staff.
 
 ## Goals
 
