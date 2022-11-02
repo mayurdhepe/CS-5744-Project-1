@@ -9,7 +9,7 @@
 // site configuration options.
 
 const siteConfig = {
-  title: 'CS 5744 - Project 1 - University Carpool Service',
+  title: 'CS 5744 - Project 1 - HokieRide',
   tagline: 'A website for testing',
   url: 'https://mayurdhepe.github.io', // Your website URL
   baseUrl: '/cs-5744-project-1/',
@@ -22,9 +22,7 @@ const siteConfig = {
   headerLinks: [],
 
   /* path to images for header/footer */
-  headerIcon: 'img/favicon.ico',
-  footerIcon: 'img/favicon.ico',
-  favicon: 'img/favicon.ico',
+
 
   /* Colors for website */
   colors: {
@@ -32,22 +30,6 @@ const siteConfig = {
     secondaryColor: '#676d64',
   },
 
-  /* Custom fonts for website */
-  /*
-  fonts: {
-    myFont: [
-      "Times New Roman",
-      "Serif"
-    ],
-    myOtherFont: [
-      "-apple-system",
-      "system-ui"
-    ]
-  },
-  */
-
-  // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()}`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
@@ -64,23 +46,7 @@ const siteConfig = {
   // No .html extensions for paths.
   cleanUrl: true,
 
-  // Open Graph and Twitter card images.
-  ogImage: 'img/undraw_online.svg',
-  twitterImage: 'img/undraw_tweetstorm.svg',
 
-  // For sites with a sizable amount of content, set collapsible to true.
-  // Expand/collapse the links and subcategories under categories.
-  // docsSideNavCollapsible: true,
-
-  // Show documentation's last contributor's name.
-  // enableUpdateBy: true,
-
-  // Show documentation's last update time.
-  // enableUpdateTime: true,
-
-  // You may provide arbitrary config keys to be used as needed by your
-  // template. For example, if you need your repo's URL...
-  //   repoUrl: 'https://github.com/facebook/test-site',
 };
 
 module.exports = siteConfig;

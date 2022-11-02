@@ -1,7 +1,7 @@
 ---
 id: conclusion
-title: Final Thoughts
-sidebar_label: Final Thoughts
+title: Conclusion
+sidebar_label: Conclusion
 ---
 
 There is one requirement that we have failed to address thus far, FR-11. Notifications must be sent to users without an external event initiating the process. There are many mechanisms to perform such actions. There is no reason to restrict the system developers from using the mechanism that best suits the project. We can, however, suggest that for any process that needs to be scheduled to run at a defined frequency AWS Lambdas provide the needed functionality. Each process can be coded and configured for AWS Lambdas independently. If we were to include theses processes in the three-tier architecture diagram, they would fall under the application tier.

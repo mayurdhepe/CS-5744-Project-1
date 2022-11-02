@@ -4,73 +4,61 @@ title: REST API Design
 sidebar_label: REST API Design
 ---
 
-The REST API will play a very important role in the system. It will contain most of the business logic for the system and provide a common language for interacting with the data. The Data Access Object (DAO) design pattern is used in our REST API, as shown in the diagram below.
+All functionality will be developed using APIs as it can be used between all platforms meaning mobile applications, web-based applications or any other user interface.
+In a client-server architecture, Representational state transfer (REST) is a kind of software architecture that describes a consistent interface between physically distinct components, frequently over the Internet. 
+REST API is designed around resources which can be business entities of your application. In our case the entities are mainly the users of the application - drivers and riders, Ride, Location and Car.
+The most common operations on these resources are GET, POST, PUT, PATCH, and DELETE.
+
+We will be using the Data Access Object (DAO) design pattern in our REST API, as shown in the diagram below.
+
 
 <figure>
-  <img src="assets/rest-api.png" alt="REST API component structure."/>
-  <figcaption>DAO Design Pattern in REST API component.</figcaption>
+  <img src="assets/dao.png" alt="DAO design pattern for REST API." width="700px"/>
+  <figcaption>DAO design pattern for REST API.</figcaption>
 </figure>
 
 ## DAO
 
-For each concept we have in our database, such as owner and pet, we will have a model class. For each model class, we will have a corresponding DAO class. On one side, the DAOs set up connections with the database and interact with it by sending SQL CRUD commands. And on the other side, they communicate with clients to provide and obtain data. The following diagram shows the relationships between components in DAO pattern.
+DAO stands for Data Access Object. The data persistence logic is separated into a distinct layer using the DAO Design Pattern. The service is fully kept in the dark regarding how the low-level actions to access the database are carried out in this fashion. This is known as the principle of Separation of Logic.
+
+
+## MVC pattern
+
+The overall architecture of the system would be similar to MVC architecture where View would be the client side of the application - mobile/web application, Controller, Service and DAO would be the server side of the application or the REST API layer of the application. Services contain the business logic of the application and DAO layer would contain the data persistence logic and each entity would have its own DAO class. The diagram below shows the MVC design pattern that can be applied to the current system.
+
 
 <figure>
-  <img src="assets/rest-api-dao.png" alt="REST API component structure."/>
-  <figcaption>DAO component relationships in the REST API component.</figcaption>
+  <img src="assets/mvc.png" alt="MVC pattern for the system." width="700px"/>
+  <figcaption>MVC pattern for the system</figcaption>
 </figure>
 
-Client-DAO: By sending requests in the format “(baseURL)/api/(endpoint)”, clients interact with DAOs on the REST API server to get or post data.
+## System Components and General Flow
 
-Client-Model: Clients obtain, modify, and sometimes create model objects. They usually obtain model objects to display the information to users; modify model objects when users update the information; create model objects when there are new instances created by users to be inserted into database.
-
-DAO-Database: DAO classes implement methods that handle the requests from clients. Upon calling, they will set up a connection with the database, prepare the command with, if any, parameters passed in, and execute the command.
-
-DAO-Model: DAO creates model object(s) after reading from the database. DAO reads from model object(s) when the properties of them get updated or they are newly created and need to be inserted to the database.
-
-Model-Database: Different model classes represent different concepts in the database. Each model object represents a line in the database.
-
-The following diagram presents the interactions between clients and database through the DAO pattern. Upon the service launches, DAOs are created and ready to communicate with both the clients and the database. The clients can get, set, insert, and delete data without any knowledge of the implementation of the database.
+The diagram below represents various components or services and their relationship within the application.
 
 <figure>
-  <img src="assets/rest-api-sequence.png" alt="REST API component sequence diagram."/>
-  <figcaption>Sequence of interactions between client, DAO, and the database.</figcaption>
+  <img src="assets/components.png" alt="System Components." width="800px"/>
+  <figcaption>System Components and general flow</figcaption>
 </figure>
 
-## DAO Operations
 
-Get data (SELECT):
-- Client sends request to the REST API
-- DAO process the request, prepare and execute the SQL statement, and get data from database
-- After receiving data from the database, DAO creates a model object (or a list of model objects, depending on the type of request)
-- Finally, DAO returns the model object(s) created to the client
+- Initially, both riders and drivers will have to verify their accounts through the external Virginia Tech API. The Hokie ID would be used as an identifier. 
+- Riders and drivers can view or update their profiles and UserService would be used for these operations. It would fetch/update records from the primary DB (MongoDB).
+- Rider Availability Service would process requests from riders to search for all nearby available drivers that are heading in the same direction or within a 2 mile radius of the driver’s chosen destination. It would get the data from the cache i.e. the Ride Availability database (SQL).
+- Riders and drivers can view their past rides taken or rides offered using the Ride History Service which would retrieve data from Primary DB.
+- Drivers can view their credits earned in their Hokie Wallet based on the rides offered. This processing would be done by the Driver Credits Service. 
+- The location and ETA would be constantly updated as the driver moves. The Driver Location Service would constantly update the location coordinates of the driver’s car using GPS and store the latest coordinates into the cache.
+- The Notification Service would process notification requests to various channels like SMS, email, VT campus police web applications.
+- The Emergency Alert Service will send a notification to the campus police department for assistance.
 
-Set data (UPDATE):
-- Client changes the property of a model object it received earlier from the REST API
-- Then the client sends requests to the REST API to update data
-- DAO reads the updated information from the model object
-- Finally, DAO prepares and executes an UPDATE statement and changes the data in database
-
-Insert (INSERT):
-- Client creates a new instance of model (usually when new accounts open or new records are generated)
-- Client sets the properties of the model object according to the new record
-- Client sends an insert request to the REST API
-- DAO reads the information in the newly created model object
-- DAO prepares and executes an INSERT statement and therefore insert the data into database
-
-Delete (DELETE):
-- Client sends a request to delete some information
-- DAO prepares and execute a DELETE statement to remove the corresponding data in database
-
-## Platform
-
-To host the API, we will use Amazon Elastic Cloud Compute (EC2) with Auto Scaling. With auto scaling, we can dynamically scale compute performance to meet demand, which will satisfy NR-3 and NR-4
 
 ## API Endpoints
 
-For the initial set of requirements all of the REST API endpoints should be private or protected in some way. We do not want to allow any anonymous source to access the API.
+All REST API endpoints should be private or protected in some fashion for the initial set of requirements. We don't want any anonymous sources to be able to use the API.
 
-API endpoints examples (not an exhaustive list):
+Some of the API endpoints would be as follows:
+
+- Mobile application for drivers and riders -
 
 <table>
   <thead>
@@ -78,130 +66,123 @@ API endpoints examples (not an exhaustive list):
       <th>API Endpoint</th>
       <th>Method</th>
       <th>Description</th>
-      <th>Authorization Control</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>/user/login</td>
-      <td>POST</td>
-      <td>Accepts user credentials and issues time sensitive API token. (FR-5)</td>
-      <td>No</td>
+      <td>POST</td> 
+      <td>Accepts credentials from driver/rider and returns API token.</td> 
     </tr>
     <tr>
       <td>/user/register</td>
       <td>POST</td>
-      <td>Processes registration form for all types of users. (FR-1 and FR-2)</td>
-      <td>No</td>
+      <td>Accepts registration details from drivers and riders.</td>
     </tr>
     <tr>
       <td>/user/:id</td>
       <td>GET</td>
-      <td>Fetches details about a user.</td>
-      <td>Yes</td>
+      <td>Gets user profile information.</td>
     </tr>
     <tr>
       <td>/user/:id</td>
       <td>POST</td>
-      <td>Updates a user’s details.</td>
-      <td>Yes</td>
+      <td>Updates user profile information.</td>
     </tr>
     <tr>
-      <td>/user/:id/pets</td>
+      <td>/user/:id/rides</td>
       <td>GET</td>
-      <td>Fetches details about a user’s pets</td>
-      <td>Yes</td>
+      <td>Fetches history rides - rides offered for driver and ride taken for rider.</td>
     </tr>
     <tr>
-      <td>/clinic</td>
-      <td>GET</td>
-      <td>Search for clinics.</td>
-      <td>Maybe</td>
-    </tr>
-    <tr>
-      <td>/clinic/:id</td>
-      <td>GET</td>
-      <td>Fetch details about a clinic.</td>
-      <td>Maybe</td>
-    </tr>
-    <tr>
-      <td>/clinic/:id/employee</td>
-      <td>GET</td>
-      <td>Fetch list of clinic employees</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>/clinic/:id/employee/:id</td>
-      <td>GET</td>
-      <td>Fetch details about a clinic employee</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>/clinic/:id/employee/:id</td>
+      <td>/user/:id/verify</td>
       <td>POST</td>
-      <td>Update details about a clinic employee. (FR-4)</td>
-      <td>Yes</td>
+      <td>Verifies the rider/driver account through an external API call to Virginia Tech’s system/API using HokieID as the identifier.</td>
     </tr>
     <tr>
-      <td>/clinic/:id/employee/create</td>
+      <td>/ride/search/:{request}</td>
       <td>POST</td>
-      <td>Allow business users to create employee accounts. (FR-3)</td>
-      <td>Yes</td>
+      <td>Search for all nearby available drivers that are heading in the same direction of the driver’s chosen destination.</td>
     </tr>
     <tr>
-      <td>/pet</td>
-      <td>GET</td>
-      <td>Search for pets.</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>/pet/:id</td>
-      <td>GET</td>
-      <td>Fetch general information about a specific animal</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>/pet/:id/vaccine</td>
-      <td>GET</td>
-      <td>Fetch vaccine history for a specific animal</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>/pet/:id/vaccine</td>
+      <td>/ride/cancel/:id</td>
       <td>POST</td>
-      <td>Update vaccine history for a specific animal</td>
-      <td>Yes</td>
+      <td>Cancels a ride - rider and notifies on SMS and Email</td>
     </tr>
     <tr>
-      <td>/pet/:id/record</td>
-      <td>GET</td>
-      <td>List of medical records associated with a pet.</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>/pet/:id/record</td>
+      <td>/ride/start/:id</td>
       <td>POST</td>
-      <td>Add a new medical record for the pet.</td>
-      <td>Yes</td>
+      <td>Starts a ride - driver and notifies on SMS and Email</td>
     </tr>
     <tr>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
+      <td>/ride/end/:id</td>
+      <td>POST</td>
+      <td>Ends a ride - rider and driver and notifies on SMS and Email</td>
+    </tr>
+    <tr>
+      <td>/ride/join/:id</td>
+      <td>POST</td>
+      <td>Join a ride - rider and notifies on SMS and Email</td>
+    </tr>
+    <tr>
+      <td>/ride/update</td>
+      <td>POST</td>
+      <td>Constantly updates the ride's current location and the ETA to the destination.</td>
+    </tr>
+    <tr>
+      <td>/ride/create</td>
+      <td>POST</td>
+      <td>Creates a ride with specific source, destination, car capacity - driver</td>
+    </tr>
+    <tr>
+      <td>/ride/driver/rate</td>
+      <td>POST</td>
+      <td>Rate the driver for the particular ride</td>
+    </tr>
+    <tr>
+      <td>/ride/rider/rate</td>
+      <td>POST</td>
+      <td>Rate the rider for the particular ride</td>
+    </tr>
+    <tr>
+      <td>/driver/processCredits</td>
+      <td>POST</td>
+      <td>Accumulates points to be transferred as a deposit into Hokie Wallet.</td>
+    </tr>
+    <tr>
+      <td>/sendAlert</td>
+      <td>POST</td>
+      <td>Send out a notification to the web-based application to alert the police of a potential incident.</td>
     </tr>
   </tbody>
 </table>
 
-<div class="notes">
-  Notes:
-  <ol>
-    <li>‘:name’ are placeholders for dynamic values.</li>
-    <li>All POST endpoints require a payload.</li>
-    <li>Authorization control indicates additional security checks to verify a user can access or modify the requested resource.</li>
-  </ol>
-</div>
+- Web-based application for VT campus police -
 
-<div class="citations">
-[1] <a href="https://www.oracle.com/technetwork/java/dataaccessobject-138824.html">https://www.oracle.com/technetwork/java/dataaccessobject-138824.html</a>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th>API Endpoint</th>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/user/search/{param}</td>
+      <td>GET</td> 
+      <td>Allows officers to look up users by {param} - first name and last name, and also HokieID.</td> 
+    </tr>
+     <tr>
+      <td>/user/rideHistory</td>
+      <td>GET</td> 
+      <td>Gets driver/rider’s ride history.</td> 
+    </tr>
+     <tr>
+      <td>/user/currentRide</td>
+      <td>GET</td> 
+      <td>Gets driver/rider’s current ride details.</td> 
+    </tr>
+  </tbody>
+</table>
+

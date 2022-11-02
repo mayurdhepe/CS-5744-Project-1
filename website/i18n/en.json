@@ -5,33 +5,29 @@
     "previous": "Previous",
     "tagline": "A website for testing",
     "docs": {
-      "api-design-rationale": {
-        "title": "REST API Design Rationale",
-        "sidebar_label": "REST API Design Rationale"
-      },
       "api-design": {
         "title": "REST API Design",
         "sidebar_label": "REST API Design"
       },
       "conclusion": {
-        "title": "Final Thoughts",
-        "sidebar_label": "Final Thoughts"
-      },
-      "data-tier-rationale": {
-        "title": "Data Tier Rationale",
-        "sidebar_label": "Data Tier Rationale"
+        "title": "Conclusion",
+        "sidebar_label": "Conclusion"
       },
       "database-design": {
         "title": "Database Design",
         "sidebar_label": "Database Design"
       },
-      "file-storage-design": {
-        "title": "File Storage Design",
-        "sidebar_label": "File Storage Design"
+      "full-text": {
+        "title": "Full Text",
+        "sidebar_label": "Full Text"
       },
       "introduction": {
         "title": "Introduction",
         "sidebar_label": "Introduction"
+      },
+      "layered-view": {
+        "title": "Layered View of our system",
+        "sidebar_label": "Layered View of our system"
       },
       "requirement-traceability-matrix": {
         "title": "Requirement Traceability Matrix",
@@ -53,17 +49,13 @@
         "title": "System Architecture",
         "sidebar_label": "System Architecture"
       },
+      "system-interface": {
+        "title": "System Interface",
+        "sidebar_label": "System Interface"
+      },
       "use-cases": {
         "title": "Use Cases",
         "sidebar_label": "Use Cases"
-      },
-      "web-app-design-rationale": {
-        "title": "Web Application Design Rationale",
-        "sidebar_label": "Web Application Design Rationale"
-      },
-      "web-app-design": {
-        "title": "Web Application Design",
-        "sidebar_label": "Web Application Design"
       }
     },
     "links": {},
@@ -71,7 +63,8 @@
       "Introduction": "Introduction",
       "Requirements Summary": "Requirements Summary",
       "High-Level Design": "High-Level Design",
-      "Design Rationale": "Design Rationale"
+      "Design Rationale": "Design Rationale",
+      "Full Text": "Full Text"
     }
   },
   "pages-strings": {
