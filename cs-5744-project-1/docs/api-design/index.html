@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>REST API Design · CS 5744 - Project 1 - HokieRide</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="All functionality will be developed using APIs as it can be used between all platforms meaning mobile applications, web-based applications or any other user interface."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="REST API Design · CS 5744 - Project 1 - HokieRide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mayurdhepe.github.io/cs-5744-project-1/"/><meta property="og:description" content="All functionality will be developed using APIs as it can be used between all platforms meaning mobile applications, web-based applications or any other user interface."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/cs-5744-project-1/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/cs-5744-project-1/js/scrollSpy.js"></script><link rel="stylesheet" href="/cs-5744-project-1/css/main.css"/><script src="/cs-5744-project-1/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cs-5744-project-1/"><h2 class="headerTitle">CS 5744 - Project 1 - HokieRide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"></ul></nav></div></header></div></div><div class="navPusher singleRowMobileNav"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>High-Level Design</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/introduction">Introduction</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Requirements Summary</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/use-cases">Use Cases</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/stakeholder-analysis">Stakeholder Analysis</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/requirements">Requirements</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">High-Level Design</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/layered-view">Layered View of our system</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/system-interface">System Interface</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/system-architecture">System Architecture</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/database-design">Database Design</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cs-5744-project-1/docs/api-design">REST API Design</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/requirement-traceability-matrix">Requirement Traceability Matrix</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Design Rationale</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/system-architecture-rationale">System Architecture Rationale</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/conclusion">Conclusion</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Full Text</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/full-text">Full Text</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">REST API Design</h1></header><article><div><span><p>All functionality will be developed using APIs as it can be used between all platforms meaning mobile applications, web-based applications or any other user interface.
+In a client-server architecture, Representational state transfer (REST) is a kind of software architecture that describes a consistent interface between physically distinct components, frequently over the Internet.
+REST API is designed around resources which can be business entities of your application. In our case the entities are mainly the users of the application - drivers and riders, Ride, Location and Car.
+The most common operations on these resources are GET, POST, PUT, PATCH, and DELETE.</p>
+<p>We will be using the Data Access Object (DAO) design pattern in our REST API, as shown in the diagram below.</p>
+<figure>
+  <img src="assets/dao.png" alt="DAO design pattern for REST API." width="700px"/>
+  <figcaption>DAO design pattern for REST API.</figcaption>
+</figure>
+<h2><a class="anchor" aria-hidden="true" id="dao"></a><a href="#dao" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>DAO</h2>
+<p>DAO stands for Data Access Object. The data persistence logic is separated into a distinct layer using the DAO Design Pattern. The service is fully kept in the dark regarding how the low-level actions to access the database are carried out in this fashion. This is known as the principle of Separation of Logic.</p>
+<h2><a class="anchor" aria-hidden="true" id="mvc-pattern"></a><a href="#mvc-pattern" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>MVC pattern</h2>
+<p>The overall architecture of the system would be similar to MVC architecture where View would be the client side of the application - mobile/web application, Controller, Service and DAO would be the server side of the application or the REST API layer of the application. Services contain the business logic of the application and DAO layer would contain the data persistence logic and each entity would have its own DAO class. The diagram below shows the MVC design pattern that can be applied to the current system.</p>
+<figure>
+  <img src="assets/mvc.png" alt="MVC pattern for the system." width="700px"/>
+  <figcaption>MVC pattern for the system</figcaption>
+</figure>
+<h2><a class="anchor" aria-hidden="true" id="system-components-and-general-flow"></a><a href="#system-components-and-general-flow" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>System Components and General Flow</h2>
+<p>The diagram below represents various components or services and their relationship within the application.</p>
+<figure>
+  <img src="assets/components.png" alt="System Components." width="800px"/>
+  <figcaption>System Components and general flow</figcaption>
+</figure>
+<ul>
+<li>Initially, both riders and drivers will have to verify their accounts through the external Virginia Tech API. The Hokie ID would be used as an identifier.</li>
+<li>Riders and drivers can view or update their profiles and UserService would be used for these operations. It would fetch/update records from the primary DB (MongoDB).</li>
+<li>Rider Availability Service would process requests from riders to search for all nearby available drivers that are heading in the same direction or within a 2 mile radius of the driver’s chosen destination. It would get the data from the cache i.e. the Ride Availability database (SQL).</li>
+<li>Riders and drivers can view their past rides taken or rides offered using the Ride History Service which would retrieve data from Primary DB.</li>
+<li>Drivers can view their credits earned in their Hokie Wallet based on the rides offered. This processing would be done by the Driver Credits Service.</li>
+<li>The location and ETA would be constantly updated as the driver moves. The Driver Location Service would constantly update the location coordinates of the driver’s car using GPS and store the latest coordinates into the cache.</li>
+<li>The Notification Service would process notification requests to various channels like SMS, email, VT campus police web applications.</li>
+<li>The Emergency Alert Service will send a notification to the campus police department for assistance.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="api-endpoints"></a><a href="#api-endpoints" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>API Endpoints</h2>
+<p>All REST API endpoints should be private or protected in some fashion for the initial set of requirements. We don't want any anonymous sources to be able to use the API.</p>
+<p>Some of the API endpoints would be as follows:</p>
+<ul>
+<li>Mobile application for drivers and riders -</li>
+</ul>
+<table>
+  <thead>
+    <tr>
+      <th>API Endpoint</th>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/user/login</td>
+      <td>POST</td> 
+      <td>Accepts credentials from driver/rider and returns API token.</td> 
+    </tr>
+    <tr>
+      <td>/user/register</td>
+      <td>POST</td>
+      <td>Accepts registration details from drivers and riders.</td>
+    </tr>
+    <tr>
+      <td>/user/:id</td>
+      <td>GET</td>
+      <td>Gets user profile information.</td>
+    </tr>
+    <tr>
+      <td>/user/:id</td>
+      <td>POST</td>
+      <td>Updates user profile information.</td>
+    </tr>
+    <tr>
+      <td>/user/:id/rides</td>
+      <td>GET</td>
+      <td>Fetches history rides - rides offered for driver and ride taken for rider.</td>
+    </tr>
+    <tr>
+      <td>/user/:id/verify</td>
+      <td>POST</td>
+      <td>Verifies the rider/driver account through an external API call to Virginia Tech’s system/API using HokieID as the identifier.</td>
+    </tr>
+    <tr>
+      <td>/ride/search/:{request}</td>
+      <td>POST</td>
+      <td>Search for all nearby available drivers that are heading in the same direction of the driver’s chosen destination.</td>
+    </tr>
+    <tr>
+      <td>/ride/cancel/:id</td>
+      <td>POST</td>
+      <td>Cancels a ride - rider and notifies on SMS and Email</td>
+    </tr>
+    <tr>
+      <td>/ride/start/:id</td>
+      <td>POST</td>
+      <td>Starts a ride - driver and notifies on SMS and Email</td>
+    </tr>
+    <tr>
+      <td>/ride/end/:id</td>
+      <td>POST</td>
+      <td>Ends a ride - rider and driver and notifies on SMS and Email</td>
+    </tr>
+    <tr>
+      <td>/ride/join/:id</td>
+      <td>POST</td>
+      <td>Join a ride - rider and notifies on SMS and Email</td>
+    </tr>
+    <tr>
+      <td>/ride/update</td>
+      <td>POST</td>
+      <td>Constantly updates the ride's current location and the ETA to the destination.</td>
+    </tr>
+    <tr>
+      <td>/ride/create</td>
+      <td>POST</td>
+      <td>Creates a ride with specific source, destination, car capacity - driver</td>
+    </tr>
+    <tr>
+      <td>/ride/driver/rate</td>
+      <td>POST</td>
+      <td>Rate the driver for the particular ride</td>
+    </tr>
+    <tr>
+      <td>/ride/rider/rate</td>
+      <td>POST</td>
+      <td>Rate the rider for the particular ride</td>
+    </tr>
+    <tr>
+      <td>/driver/processCredits</td>
+      <td>POST</td>
+      <td>Accumulates points to be transferred as a deposit into Hokie Wallet.</td>
+    </tr>
+    <tr>
+      <td>/sendAlert</td>
+      <td>POST</td>
+      <td>Send out a notification to the web-based application to alert the police of a potential incident.</td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+<li>Web-based application for VT campus police -</li>
+</ul>
+<table>
+  <thead>
+    <tr>
+      <th>API Endpoint</th>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/user/search/{param}</td>
+      <td>GET</td> 
+      <td>Allows officers to look up users by {param} - first name and last name, and also HokieID.</td> 
+    </tr>
+     <tr>
+      <td>/user/rideHistory</td>
+      <td>GET</td> 
+      <td>Gets driver/rider’s ride history.</td> 
+    </tr>
+     <tr>
+      <td>/user/currentRide</td>
+      <td>GET</td> 
+      <td>Gets driver/rider’s current ride details.</td> 
+    </tr>
+  </tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cs-5744-project-1/docs/database-design"><span class="arrow-prev">← </span><span>Database Design</span></a><a class="docs-next button" href="/cs-5744-project-1/docs/requirement-traceability-matrix"><span>Requirement Traceability Matrix</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#dao">DAO</a></li><li><a href="#mvc-pattern">MVC pattern</a></li><li><a href="#system-components-and-general-flow">System Components and General Flow</a></li><li><a href="#api-endpoints">API Endpoints</a></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Requirements · CS 5744 - Project 1 - HokieRide</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The requirements of this software application will be recognized as to cater to the students and faculty, especially at Virginia Tech. The customer of this application will  be the university that is willing to participate with the application built. Although there is scope to expand this application to many universities, in order to keep it as narrow and focused as possible, the customer will be Virginia Tech. The intended user will be the students and faculty that attend Virginia Tech. Since, there is potential for other universities to link up with our product, we will take this into consideration when designing our system. "/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Requirements · CS 5744 - Project 1 - HokieRide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mayurdhepe.github.io/cs-5744-project-1/"/><meta property="og:description" content="The requirements of this software application will be recognized as to cater to the students and faculty, especially at Virginia Tech. The customer of this application will  be the university that is willing to participate with the application built. Although there is scope to expand this application to many universities, in order to keep it as narrow and focused as possible, the customer will be Virginia Tech. The intended user will be the students and faculty that attend Virginia Tech. Since, there is potential for other universities to link up with our product, we will take this into consideration when designing our system. "/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/cs-5744-project-1/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/cs-5744-project-1/js/scrollSpy.js"></script><link rel="stylesheet" href="/cs-5744-project-1/css/main.css"/><script src="/cs-5744-project-1/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/cs-5744-project-1/"><h2 class="headerTitle">CS 5744 - Project 1 - HokieRide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"></ul></nav></div></header></div></div><div class="navPusher singleRowMobileNav"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Requirements Summary</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/introduction">Introduction</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Requirements Summary</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/use-cases">Use Cases</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/stakeholder-analysis">Stakeholder Analysis</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/cs-5744-project-1/docs/requirements">Requirements</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">High-Level Design</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/layered-view">Layered View of our system</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/system-interface">System Interface</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/system-architecture">System Architecture</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/database-design">Database Design</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/api-design">REST API Design</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/requirement-traceability-matrix">Requirement Traceability Matrix</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Design Rationale</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/system-architecture-rationale">System Architecture Rationale</a></li><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/conclusion">Conclusion</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Full Text</h3><ul class=""><li class="navListItem"><a class="navItem" href="/cs-5744-project-1/docs/full-text">Full Text</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Requirements</h1></header><article><div><span><p>The requirements of this software application will be recognized as to cater to the students and faculty, especially at Virginia Tech. The customer of this application will  be the university that is willing to participate with the application built. Although there is scope to expand this application to many universities, in order to keep it as narrow and focused as possible, the customer will be Virginia Tech. The intended user will be the students and faculty that attend Virginia Tech. Since, there is potential for other universities to link up with our product, we will take this into consideration when designing our system.</p>
+<h2><a class="anchor" aria-hidden="true" id="functional-requirements"></a><a href="#functional-requirements" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Functional Requirements</h2>
+<ul>
+<li><strong>FR-1</strong> - Students and faculty of Virginia Tech can self-register for an account on the HokieRide app by providing first name, last name, email address, HokieID, and optionally their phone number.</li>
+<li><strong>FR-2</strong> - In order to use the application, the system must verify all accounts to be identified as Virginia Tech students and faculty.</li>
+<li><strong>FR-3</strong> - After verification, all users may login with unique credentials (username and password).</li>
+<li><strong>FR-4</strong> - Riders should be able to search for all nearby available drivers that are heading in the same direction or within a 2 mile radius of the driver’s chosen destination.</li>
+<li><strong>FR-5</strong> - Riders and drivers should be able to request and cancel a ride if needed.</li>
+<li><strong>FR-6</strong> - Once a ride is accepted by a driver, riders and driver should be able to see each other’s location and riders should view an estimated time of arrival (ETA) until the trip is completed.</li>
+<li><strong>FR-7</strong> - The location and ETA should constantly be updated as the driver moves.</li>
+<li><strong>FR-8</strong> - Drivers should be able to create a ride and specify source, destination and number of riders he/she is able to accommodate in their car.</li>
+<li><strong>FR-9</strong> - Email and/or SMS notifications should be sent out when the driver has arrived and when the trip has been completed.</li>
+<li><strong>FR-10</strong> - Riders and drivers should be able to rate each other at the end of the trip.</li>
+<li><strong>FR-11</strong> - Users should be able to view their history - rides taken and rides offered.</li>
+<li><strong>FR-12</strong> - System should provide a credit system, agreed upon by Virginia Tech, that accumulates points to be transferred as a deposit into Hokie Wallet or provided as parking spots during weekdays for free.</li>
+<li><strong>FR-13</strong> - All users will be able to use a “Alert VT Police” button which will send a notification to the campus police department for assistance.</li>
+<li><strong>FR-14</strong> - The system will provide a web-based application to display an interactive database for the Virginia Tech Campus Police Department.</li>
+<li><strong>FR-15</strong> - The web-based application will allow officers to look up users by first name and last name, and also HokieID.</li>
+<li><strong>FR-16</strong> - Search results will show information about the user such as name, email, phone number and picture. Additionally, the user’s ride history, current trip details (if on a trip) which includes start location, destination, car mode, license plate number, and current location will be displayed.</li>
+<li><strong>FR-17</strong> - Should there be an emergency, the system should send out a notification to the web-based application to alert the police of a potential incident.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="non-functional-requirements"></a><a href="#non-functional-requirements" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Non-functional Requirements</h2>
+<ul>
+<li><strong>NR-1</strong> - The application should be scalable in order to meet the user demand.</li>
+<li><strong>NR-2</strong> - Both mobile and web applications should abide by the Web Content Accessibility Guidelines 2.0 (WCAG).</li>
+<li><strong>NR-3</strong> - Use SSL Certificates with HTTPs for APIs and Web Content Accessibility</li>
+<li><strong>NR-4</strong> - Use a common package to handle both Cookies and Session maintenance. Initial stage of security is modular.</li>
+<li><strong>NR-5</strong> - Validate users by email addresses. Send verification email to the user with a clickable link to validate authentication.</li>
+<li><strong>NR-6</strong> - Use Virginia Tech API(s) to validate active accounts (active students and staff) upon email account verification.</li>
+<li><strong>NR-7</strong> - Design a highly decoupled system to facilitate connections with external third-party APIs, services and more.</li>
+<li><strong>NR-8</strong> - Data backups must be made on a daily basis.</li>
+<li><strong>NR-9</strong> - Data backup storage containers should be of low cost. Speeds can be reduced to minimum. Only enough for daily traffic updates.</li>
+<li><strong>NR-10</strong> - Use MongoDB to store Documents (JSONs). Better storage management of routes taken.</li>
+<li><strong>NR-11</strong> - Efforts towards obtaining real-time updates on searches, locations, ETAs and other notifications with little-to-no lag.</li>
+<li><strong>NR-12</strong> -   Prioritize speeds to searching for rides compared to other minor features like fetching ride histories for users.</li>
+<li><strong>NR-13</strong> - Any and all operations related to security and safety such as emergency notifications, ride searches on web-application, should be quick (&lt; 2 seconds) and seamless.</li>
+<li><strong>NR-14</strong> -   Store ride availability status details in a separate Database table to increase read writes for the sole purpose of searching for rides. Maximizes speeds by reducing calls made to the database by other features.</li>
+<li><strong>NR-15</strong> -   Encrypt all customer data using 1 encryption type. As this data can be set as Confidential.</li>
+<li><strong>NR-16</strong> -   Encrypt passwords with another stronger encryption type. This is crucial for minimizing password hacks.</li>
+<li><strong>NR-17</strong> -   Allow for error logs to be made so that maintenance can be done once/twice a week.</li>
+<li><strong>NR-18</strong> -   Develop all functionality using APIs as it can be used between all platforms (Browser and Apps). No major in-app/in-browser computing and processing.</li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/cs-5744-project-1/docs/stakeholder-analysis"><span class="arrow-prev">← </span><span>Stakeholder Analysis</span></a><a class="docs-next button" href="/cs-5744-project-1/docs/layered-view"><span>Layered View of our system</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#functional-requirements">Functional Requirements</a></li><li><a href="#non-functional-requirements">Non-functional Requirements</a></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>
